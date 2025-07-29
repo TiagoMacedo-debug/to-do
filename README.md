@@ -17,6 +17,6 @@ Funcionalidades
 - **Estética inspirada em aplicativos Android**: Layout limpo e moderno.
 
 ---
-**Link para aplicação:** https://tiagomacedo-debug.github.io/to-do
+**Link para aplicação:** [To-Do List](https://tiagomacedo-debug.github.io/to-do)
 
 <img width="1391" height="730" alt="image" src="https://github.com/user-attachments/assets/3f432420-612b-4f8f-9074-5f81eede0920" />
