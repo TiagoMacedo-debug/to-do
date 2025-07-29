@@ -11,8 +11,8 @@ function salvar() {
 }
 
 function renderizar() {
-  pendentes.innerHTML = '<p id="msg-pendentes" class="empty-message">Nenhuma tarefa pendente</p>';
-  concluidas.innerHTML = '<p id="msg-concluidas" class="empty-message">Nenhuma tarefa concluída</p>';
+  pendentes.innerHTML = "";
+  concluidas.innerHTML = "";
 
   tarefas.forEach((t, i) => {
     const div = document.createElement("div");
@@ -20,6 +20,29 @@ function renderizar() {
 
     const span = document.createElement("span");
     span.textContent = t.texto;
+
+    const inputEdit = document.createElement("input");
+    inputEdit.type = "text";
+    inputEdit.value = t.texto;
+    inputEdit.className = "edit-input";
+    inputEdit.style.display = "none";
+
+    inputEdit.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        salvarEdicao();
+      }
+    });
+
+    inputEdit.addEventListener("blur", salvarEdicao);
+
+    function salvarEdicao() {
+      const novoTexto = inputEdit.value.trim();
+      if (novoTexto !== "") {
+        tarefas[i].texto = novoTexto;
+        salvar();
+        renderizar();
+      }
+    }
 
     const actions = document.createElement("div");
     actions.className = "task-actions";
@@ -32,6 +55,14 @@ function renderizar() {
       renderizar();
     };
 
+    const btnEditar = document.createElement("button");
+    btnEditar.innerHTML = '<i class="bi bi-pencil"></i>';
+    btnEditar.onclick = () => {
+      span.style.display = "none";
+      inputEdit.style.display = "inline-block";
+      inputEdit.focus();
+    };
+
     const btnExcluir = document.createElement("button");
     btnExcluir.innerHTML = '<i class="bi bi-trash-fill"></i>';
     btnExcluir.onclick = () => {
@@ -41,16 +72,17 @@ function renderizar() {
     };
 
     actions.appendChild(btnConcluir);
+    actions.appendChild(btnEditar);
     actions.appendChild(btnExcluir);
+
     div.appendChild(span);
+    div.appendChild(inputEdit);
     div.appendChild(actions);
 
     (t.feita ? concluidas : pendentes).appendChild(div);
   });
 
-  // Mostrar ou ocultar mensagens de lista vazia
-  document.getElementById("msg-pendentes").style.display = pendentes.children.length === 1 ? "block" : "none";
-  document.getElementById("msg-concluidas").style.display = concluidas.children.length === 1 ? "block" : "none";
+  atualizarMensagemVazia();
 }
 
 function adicionarTarefa() {
