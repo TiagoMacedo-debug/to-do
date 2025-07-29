@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Lista de Tarefas</title>
-    <link rel="stylesheet" href="todo.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="todo.css">
 </head>
 
 <body>
-    <div class="container">
+    <header>
+        <a href="https://github.com/TiagoMacedo-debug/to-do" class="github-btn" target="_blank" aria-label="GitHub do projeto">
+            <i class="bi bi-github"></i>
+        </a>
         <h1>Lista de Tarefas</h1>
-        <form id="task-form">
-            <input type="text" id="task-input" placeholder="Digite uma nova tarefa..." required />
-            <button type="submit">Adicionar</button>
-        </form>
-        <ul id="task-list"></ul>
+    </header>
+
+    <div class="tab-selector">
+        <button id="tab-pendentes" class="active">Pendentes</button>
+        <button id="tab-concluidas">Concluídas</button>
     </div>
+
+    <div class="add-task-section mb-4">
+        <input type="text" id="novaTarefa" placeholder="Adicione uma nova tarefa" />
+        <button onclick="adicionarTarefa()">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+    </div>
+
+    <div id="pendentes" class="task-list active"></div>
+    <div id="concluidas" class="task-list"></div>
+
     <script src="todo.js"></script>
 </body>
 
